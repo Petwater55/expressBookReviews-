@@ -20,7 +20,7 @@ app.use("/customer/auth/*", function auth(req,res,next){
     }, 'access', {expiresIn: 60 * 60 }); 
     // This stores the access token and username in session
     req.session.autherization ={
-        accessToken, username
+        accesstoken, username
     }
     return res.status(200).send('User successfully logged in! ');
 } else {
@@ -28,7 +28,7 @@ app.use("/customer/auth/*", function auth(req,res,next){
 }
 });
  
-const PORT =5000;
+const PORT = process.env.PORT || 5000;
 
 app.use("/customer", customer_routes);
 app.use("/", genl_routes);
