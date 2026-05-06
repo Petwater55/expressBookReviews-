@@ -81,5 +81,13 @@ public_users.get('/review/:isbn',function (req, res) {
     return res.status(404).json({message: "Reviews not found for this ISBN"});
   }
 });
+const axios = require('axios');
 
+function getBooks() {
+    axios.get('')
+    .then(response => {
+        console.log("Books available:", response.data);
+    });
+}
+module.exports = { getBooks };
 module.exports.general = public_users;

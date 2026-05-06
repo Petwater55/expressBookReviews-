@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
-const { authenticated } = require('./router/auth_users.js');
+const { authenticatedUser } = require('./router/auth_users.js');
 const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
 
@@ -24,7 +24,7 @@ app.use("/customer/auth/*", function auth(req,res,next){
     }
     return res.status(200).send('User successfully logged in! ');
 } else {
-    return res.status(208).json({message: "Invalid login. Check username and password"});
+    return res.status(400).json({message: "Invalid login. Check username and password"});
 }
 });
  
