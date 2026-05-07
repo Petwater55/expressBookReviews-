@@ -12,21 +12,13 @@ app.use(express.json());
 
 app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
 
-app.use("/customer/auth/*", function auth(req,res,next){
-    if(authenticatedUser(username, password)) {
-        // Generated JWT access token
-        let accesstoken = jwt.sign({
-            data: password
-    }, 'access', {expiresIn: 60 * 60 }); 
-    // This stores the access token and username in session
-    req.session.autherization ={
-        accesstoken, username
+app.use("/customer/auth/*", (req, res, next) => {
+    if (req.session && req.session.authorization) {
+      next();
+    } else {
+      return res.status(401).json({ message: "Unauthorized access" });
     }
-    return res.status(200).send('User successfully logged in! ');
-} else {
-    return res.status(400).json({message: "Invalid login. Check username and password"});
-}
-});
+  });
  
 const PORT = process.env.PORT || 5000;
 

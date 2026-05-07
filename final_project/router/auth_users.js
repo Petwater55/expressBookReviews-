@@ -22,13 +22,13 @@ regd_users.post("/customer/login", (req,res) => {
   }
 
   if (authenticatedUser(username, password)) {
-    const accesstoken = jwt.sign({ username: username}, 'access', { expiresIn: '1h' });
+    const accessToken = jwt.sign({ username }, 'access', { expiresIn: '1h' });
     req.session.authorization = {
-        accesstoken, 
+        accessToken, 
         username
     };
     
-  return res.status(200).json({message: "User successfully logged in", accesstoken });
+  return res.status(200).json({message: "User successfully logged in", accessToken });
 } else {
     return res.status(401).json({message: "Invalid username or password"});
 }
