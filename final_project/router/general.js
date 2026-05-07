@@ -21,9 +21,11 @@ public_users.post("/register", (req,res) => {
 });
 
 // Get the book list available in the shop
-public_users.get('/books/:books',function (req, res) {
-  res.send(JSON.stringify(books, null, 4 ));
-  return res.status(300).json(`This is the list of books that are available`);
+public_users.get('/books',function (req, res) {
+    return res.status(200).json({
+        message: "This is a list of books that are available",
+        books: books
+    });
 });
 
 // Get book details based on ISBN
