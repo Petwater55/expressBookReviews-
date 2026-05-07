@@ -29,9 +29,12 @@ public_users.get('/books',function (req, res) {
 });
 
 // Get book details based on ISBN
-public_users.get('/isbn/:isbn',function (req, res) {
+public_users.get('/books/:isbn',function (req, res) {
   const isbn = req.params.isbn;
-  return res.status(300).json(`You requested the book with isbn: ${isbn}`);
+  return res.status(200).json({
+    message: `You requested the book with isbn: ${isbn}`,
+    books: isbn
+    });
  });
   
 // Get book details based on author
