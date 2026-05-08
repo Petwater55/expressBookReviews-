@@ -92,5 +92,37 @@ function getBooks() {
         console.log("Books available:", response.data);
     });
 }
+public_users.get('/axios/isbn/:isbn', async (req, res) => {
+    const isbn = req.params.isbn;
+  
+    try {
+      const response = await axios.get(`https://justbringit4-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/${isbn}`);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching book details", error: error.message });
+    }
+  });
+
+  public_users.get('/axios/author/:author', async (req, res) => {
+    const author = req.params.author;
+  
+    try {
+      const response = await axios.get(`https://justbringit4-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/books/author/${author}`);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching books by author", error: error.message });
+    }
+  });
+  
+  public_users.get('/axios/title/:title', async (req, res) => {
+    const title = req.params.title;
+  
+    try {
+      const response = await axios.get(`https://justbringit4-5000.theianext-1-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/books/title/${title}`);
+      res.json(response.data);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching books by title", error: error.message });
+    }
+  });
 module.exports = { getBooks };
 module.exports.general = public_users;
